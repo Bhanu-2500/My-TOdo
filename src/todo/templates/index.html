@@ -1,0 +1,49 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>Document</title>
+<style>
+    .one-nav{
+        background-color: aquamarine;
+        display: flex;
+        justify-content: center;
+        
+}
+    .one-line{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        background-color: blanchedalmond;
+        border: 1px black solid;
+        padding: auto;
+        padding-top: 15px;
+        padding-left: 30px;
+        padding-right: 15px;
+        
+    }
+</style>
+</head>
+<body>
+    <nav class="navbar one-nav fixed-top">
+        <form action="add_todo/" method="POST">{% csrf_token %}
+            <input type="text" name="content" required style="width: 25cm;border: tomato 2px solid;" >
+            <input type="submit" value="Add Todo" style="background-color: rgb(150, 150, 150);" >
+        </form> 
+    </nav>
+
+    
+<ul style="background-color: rgb(230, 142, 80); padding-top: 62px;padding-right: 50px;">  
+    {% for q in obj %}
+    <div class="one-line">
+        <li style="list-style-type: none;"><h4>{{ q.todo_name }}</h4></li>  
+        <form action="/delete_todo/{{q.id}}/" method="POST">{% csrf_token %}
+            <input type="submit" value="Delete">
+        </form>
+    </div>
+    {% endfor %}
+</ul>  
+</body>
+</html>
